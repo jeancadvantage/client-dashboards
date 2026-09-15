@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conversion Advantage — Client Dashboards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C10; --surface:#15171C; --line:#26292F;
+    --blue:#3E7BFF; --gold:#D4A857; --text:#F5F5F7; --text-dim:#8B8D96;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:'IBM Plex Sans',sans-serif;
+    display:flex;align-items:center;justify-content:center;min-height:100vh;padding:32px;}
+  .wrap{max-width:640px;width:100%;}
+  h1{font-family:'Archivo',sans-serif;font-size:28px;font-weight:800;margin:0 0 8px;}
+  .sub{color:var(--text-dim);font-size:14px;margin:0 0 36px;}
+  .card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:24px 26px;text-decoration:none;color:var(--text);margin-bottom:14px;transition:border-color .15s;}
+  .card:hover{border-color:var(--blue);}
+  .card .name{font-family:'Archivo',sans-serif;font-size:17px;font-weight:700;margin-bottom:4px;}
+  .card .desc{font-size:13px;color:var(--text-dim);}
+  .card.gold:hover{border-color:var(--gold);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Client dashboards</h1>
+  <p class="sub">Marketing ecosystem reports — Conversion Advantage</p>
+  <a class="card" href="subaru-edenvale.html">
+    <div class="name">Subaru Edenvale</div>
+    <div class="desc">Marketing ecosystem — June to August 2026</div>
+  </a>
+  <a class="card gold" href="mahindra-nelspruit.html">
+    <div class="name">Mahindra Nelspruit</div>
+    <div class="desc">Marketing ecosystem — June to August 2026</div>
+  </a>
+</div>
+</body>
+</html>

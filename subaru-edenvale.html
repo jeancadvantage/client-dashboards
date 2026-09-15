@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subaru Edenvale — Marketing Ecosystem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0C10;
+    --surface:#15171C;
+    --surface-2:#1B1E24;
+    --line:#26292F;
+    --blue:#3E7BFF;
+    --blue-dim:#1E5FCE;
+    --gold:#D4A857;
+    --green:#4FBE83;
+    --text:#F5F5F7;
+    --text-dim:#8B8D96;
+    --up:#4FBE83;
+    --down:#E5675F;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);}
+  body{font-family:'IBM Plex Sans',sans-serif;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.num{font-family:'Archivo',sans-serif;}
+  .wrap{max-width:1120px;margin:0 auto;padding:56px 32px 90px;}
+
+  header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;border-bottom:1px solid var(--line);padding-bottom:28px;}
+  .brand{font-size:14px;color:var(--text-dim);letter-spacing:.02em;margin-bottom:10px;}
+  header h1{font-size:34px;font-weight:800;margin:0;letter-spacing:-.02em;}
+  header .period{font-size:14px;color:var(--text-dim);text-align:right;}
+
+  /* ---- Hero ---- */
+  .hero{display:grid;grid-template-columns:1fr 1fr 1fr 1.2fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px;}
+  .hero-cell{background:var(--surface);padding:30px 26px;}
+  .hero-cell.lead{background:linear-gradient(160deg, #17223A 0%, var(--surface) 62%);}
+  .hero-label{font-size:13px;color:var(--text-dim);margin-bottom:14px;}
+  .hero-num{font-size:38px;font-weight:800;letter-spacing:-.02em;line-height:1;}
+  .hero-sub{font-size:13px;color:var(--text-dim);margin-top:10px;}
+  .hero-cell.lead .hero-num{color:var(--gold);font-size:42px;}
+  .hero-note{font-size:12.5px;color:var(--text-dim);margin:0 0 56px;padding-top:10px;line-height:1.6;max-width:820px;}
+  .hero-note b{color:var(--text);font-weight:500;}
+
+  section{margin-bottom:60px;}
+  .sec-head{margin-bottom:22px;}
+  .sec-head h2{font-size:20px;font-weight:700;margin:0 0 6px;}
+  .sec-head p{font-size:13.5px;color:var(--text-dim);margin:0;max-width:620px;line-height:1.55;}
+
+  /* ---- Compare bars ---- */
+  .compare-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px;}
+  .compare-row{margin-bottom:22px;}
+  .compare-row:last-child{margin-bottom:0;}
+  .compare-row-head{display:flex;justify-content:space-between;font-size:14px;margin-bottom:8px;}
+  .compare-row-head .who{color:var(--text-dim);}
+  .compare-row-head .val{font-weight:700;font-family:'Archivo';}
+  .bar-track{height:10px;background:var(--surface-2);border-radius:6px;overflow:hidden;}
+  .bar-fill{height:100%;border-radius:6px;}
+  .bar-fill.edenvale{background:linear-gradient(90deg, var(--blue-dim), var(--blue));}
+  .bar-fill.industry{background:var(--text-dim);}
+  .compares-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .source-note{font-size:11.5px;color:var(--text-dim);margin-top:16px;line-height:1.5;}
+
+  /* ---- Month tabs ---- */
+  .month-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+  .month-row h2{font-size:20px;font-weight:700;margin:0;}
+  .tabs{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px;}
+  .tab{padding:8px 20px;font-size:14px;font-family:'IBM Plex Sans';font-weight:500;color:var(--text-dim);background:none;border:none;border-radius:8px;cursor:pointer;transition:background .18s,color .18s;}
+  .tab.active{background:var(--blue-dim);color:#fff;}
+
+  /* ---- Channel breakdown ---- */
+  .channels{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+  .channel-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px;}
+  .channel-card.google{border-top:3px solid var(--blue);}
+  .channel-card.social{border-top:3px solid var(--gold);}
+  .channel-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px;}
+  .channel-head h3{font-size:16px;font-weight:600;margin:0;}
+  .channel-head .spend{font-size:22px;font-weight:700;font-family:'Archivo';}
+  .metric-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .metric{padding-top:12px;border-top:1px solid var(--line);}
+  .metric-label{font-size:12px;color:var(--text-dim);margin-bottom:5px;}
+  .metric-val{font-size:19px;font-weight:600;font-family:'Archivo';}
+  .delta{font-size:12px;font-weight:500;margin-left:6px;}
+  .delta.up{color:var(--up);}
+  .delta.down{color:var(--down);}
+  .est-flag{font-size:11px;color:var(--text-dim);font-style:italic;}
+  .card-foot{font-size:11.5px;color:var(--text-dim);margin-top:18px;padding-top:16px;border-top:1px solid var(--line);line-height:1.5;}
+
+  .website-strip{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:22px 26px;display:flex;justify-content:space-between;align-items:center;}
+  .website-strip .wtitle{font-size:14px;color:var(--text-dim);}
+  .website-metrics{display:flex;gap:40px;}
+  .website-metrics div{text-align:right;}
+  .website-metrics .metric-val{font-size:20px;}
+
+  /* ---- Sales section ---- */
+  .close-rate-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px;margin-bottom:16px;}
+  .sales-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .sales-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;}
+  .sales-card .pct{font-size:32px;font-weight:800;font-family:'Archivo';color:var(--gold);}
+  .sales-card .label{font-size:14px;color:var(--text);margin:6px 0 14px;font-weight:500;}
+  .sales-card .count{font-size:13px;color:var(--text-dim);}
+  .sales-card.pre{border-top:3px solid var(--blue);}
+  .sales-card.new{border-top:3px solid var(--gold);}
+  .sales-card.workshop{border-top:3px solid var(--green);}
+
+  /* ---- Trend ---- */
+  .trend-card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:32px;}
+  svg{display:block;width:100%;height:auto;}
+  .month-label{font-size:13px;fill:var(--text);font-family:'IBM Plex Sans';font-weight:500;}
+  .cpl-num{font-size:15px;fill:var(--gold);font-family:'Archivo';font-weight:700;}
+
+  footer{margin-top:24px;font-size:12px;color:var(--text-dim);border-top:1px solid var(--line);padding-top:20px;line-height:1.6;}
+  footer p{margin:0 0 8px;}
+
+  @media(max-width:760px){
+    .hero{grid-template-columns:1fr 1fr;}
+    .channels{grid-template-columns:1fr;}
+    .metric-grid{grid-template-columns:1fr 1fr;}
+    .website-strip{flex-direction:column;align-items:flex-start;gap:16px;}
+    .website-metrics{gap:24px;}
+    .compares-grid{grid-template-columns:1fr;}
+    .sales-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <div class="brand">Subaru Edenvale · Conversion Advantage</div>
+      <h1>Marketing ecosystem</h1>
+    </div>
+    <div class="period">June – August 2026<br>Google Ads + Social Ads combined</div>
+  </header>
+
+  <div class="hero" id="hero"></div>
+  <p class="hero-note" id="heroNote"></p>
+
+  <section>
+    <div class="sec-head">
+      <h2>How this compares</h2>
+      <p>Against a published 2026 automotive industry benchmark — not a self-graded scorecard.</p>
+    </div>
+    <div class="compare-card" id="cvrCompare" style="max-width:560px;"></div>
+  </section>
+
+  <div class="month-row">
+    <h2>Channel breakdown</h2>
+    <div class="tabs" id="tabs">
+      <button class="tab" data-m="jun">June</button>
+      <button class="tab" data-m="jul">July</button>
+      <button class="tab active" data-m="aug">August</button>
+    </div>
+  </div>
+
+  <div class="channels" id="channels"></div>
+
+  <div class="website-strip" id="websiteStrip" style="margin-bottom:60px;"></div>
+
+  <section>
+    <div class="sec-head">
+      <h2>Lead type breakdown</h2>
+      <p id="salesIntro"></p>
+    </div>
+    <div class="sales-grid" id="salesGrid"></div>
+  </section>
+
+  <section style="margin-bottom:20px;">
+    <div class="sec-head">
+      <h2>Cost per lead, three-month trend</h2>
+      <p id="trendIntro"></p>
+    </div>
+    <div class="trend-card">
+      <svg viewBox="0 0 1000 300" id="trendSvg"></svg>
+    </div>
+  </section>
+
+  <footer>
+    <p><b>Leads:</b> the leads figure is total website conversions tracked via GTM on the dedicated landing page, covering traffic from both Google and Social — it is not split by source channel, so the "Conversions" line inside the Google Ads card below is the same tracked total, not a Google-only subset.</p>
+    <p><b>Spend:</b> Google Ads spend for June and August is estimated (avg. CPC × clicks), as those two reports don't state total spend directly. July spend is as reported.</p>
+    <p><b>Lead type split:</b> the pre-owned/new/parts breakdown is not directly tracked. It's modelled from that month's actual Used Cars vs. New Cars vs. Book A Service campaign share of landing page views (per the uploaded ad reports), cross-checked against South Africa's national used-to-new dealer sales ratio of ~1.7:1 (Lightstone/naamsa, 2026). It's a reasoned estimate, not a GTM-tracked figure.</p>
+  </footer>
+
+</div>
+
+<script>
+const data = {
+  jun: {
+    label: "June 2026",
+    google: { spend: 5849.62, spendEst:true, impressions:69797, clicks:5969, ctr:8.55, cpc:0.98, conv:879, convRate:14.64 },
+    social: { spend: 2999.49, impressions:209146, clicks:4080, ctr:1.95, reach:97340, lpv:2785, cpv:1.08, deltaClicks:-21.1 },
+    web: { users:6483, views:9001, engagement:25.5 },
+    leads: 879,
+    leadSplit: { pre: 0.45, new: 0.37, parts: 0.18 }
+  },
+  jul: {
+    label: "July 2026",
+    google: { spend: 4537.70, spendEst:false, impressions:44555, clicks:4422, ctr:9.92, cpc:1.03, conv:741, convRate:16.73 },
+    social: { spend: 2999.14, impressions:190454, clicks:4989, ctr:2.62, reach:81198, lpv:2957, cpv:1.01, deltaClicks:22.3 },
+    web: { users:5832, views:7975, engagement:26.46 },
+    leads: 741,
+    leadSplit: { pre: 0.36, new: 0.50, parts: 0.14 }
+  },
+  aug: {
+    label: "August 2026",
+    google: { spend: 4841.78, spendEst:true, impressions:41171, clicks:4442, ctr:10.79, cpc:1.09, conv:671, convRate:14.78 },
+    social: { spend: 2999.13, impressions:313612, clicks:4536, ctr:1.45, reach:91256, lpv:2376, cpv:1.26, deltaClicks:-9.1 },
+    web: { users:5422, views:7385, engagement:29.07 },
+    leads: 671,
+    leadSplit: { pre: 0.43, new: 0.41, parts: 0.16 }
+  }
+};
+
+const INDUSTRY_CVR = 6.0;
+
+const rand = (n, dec=0) => n.toLocaleString('en-ZA', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+const fmtR = (n, dec=0) => 'R' + rand(n, dec);
+
+function combinedSpend(d){ return d.google.spend + d.social.spend; }
+function combinedClicks(d){ return d.google.clicks + d.social.clicks; }
+function costPerLead(d){ return combinedSpend(d) / d.leads; }
+
+function renderHero(m){
+  const d = data[m];
+  document.getElementById('hero').innerHTML = `
+    <div class="hero-cell">
+      <div class="hero-label">Combined ad spend — ${d.label}</div>
+      <div class="hero-num">${fmtR(combinedSpend(d))}</div>
+      <div class="hero-sub">Google ${fmtR(d.google.spend)} + Social ${fmtR(d.social.spend)}</div>
+    </div>
+    <div class="hero-cell">
+      <div class="hero-label">Combined clicks driven</div>
+      <div class="hero-num">${rand(combinedClicks(d))}</div>
+      <div class="hero-sub">${rand(d.google.impressions + d.social.impressions)} impressions</div>
+    </div>
+    <div class="hero-cell">
+      <div class="hero-label">Leads generated</div>
+      <div class="hero-num">${rand(d.leads)}</div>
+      <div class="hero-sub">Website conversions, GTM-tracked</div>
+    </div>
+    <div class="hero-cell lead">
+      <div class="hero-label">Cost per lead</div>
+      <div class="hero-num">${fmtR(costPerLead(d), 2)}</div>
+      <div class="hero-sub">Combined spend ÷ total leads</div>
+    </div>
+  `;
+  document.getElementById('heroNote').innerHTML = `<b>Reading this:</b> "Cost per lead" divides total ecosystem spend by leads captured across both channels via GTM. It's a lead-generation cost metric, not a revenue ROAS figure — that would need actual vehicle sale values, which aren't in the source reports.`;
+}
+
+function renderLeadTypeIntro(m){
+  const d = data[m];
+  const s = d.leadSplit;
+  document.getElementById('salesIntro').innerHTML = `${d.label} estimate, based on that month's actual Used vs. New vs. Service campaign mix (cross-checked against SA's national ~1.7:1 used-to-new dealer sales ratio): ${(s.pre*100).toFixed(0)}% pre-owned, ${(s.new*100).toFixed(0)}% new, ${(s.parts*100).toFixed(0)}% parts.`;
+}
+
+function renderCvrCompare(m){
+  const d = data[m];
+  const maxScale = 20;
+  document.getElementById('cvrCompare').innerHTML = `
+    <div class="compare-row">
+      <div class="compare-row-head"><span class="who">Subaru Edenvale — Google Ads conversion rate</span><span class="val">${d.google.convRate}%</span></div>
+      <div class="bar-track"><div class="bar-fill edenvale" style="width:${(d.google.convRate/maxScale*100).toFixed(0)}%"></div></div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-row-head"><span class="who">Automotive industry average</span><span class="val">~${INDUSTRY_CVR}%</span></div>
+      <div class="bar-track"><div class="bar-fill industry" style="width:${(INDUSTRY_CVR/maxScale*100).toFixed(0)}%"></div></div>
+    </div>
+    <div class="source-note">Source: WordStream/LocaliQ &amp; CuFinder 2026 automotive Google Ads benchmarks (avg. 5.8–6.03% conversion rate).</div>
+  `;
+}
+
+function renderChannels(m){
+  const d = data[m];
+  document.getElementById('channels').innerHTML = `
+    <div class="channel-card google">
+      <div class="channel-head">
+        <h3>Google Ads</h3>
+        <div class="spend">${fmtR(d.google.spend)}${d.google.spendEst ? ' <span class="est-flag">est.</span>' : ''}</div>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">${rand(d.google.impressions)}</div></div>
+        <div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">${rand(d.google.clicks)}</div></div>
+        <div class="metric"><div class="metric-label">CTR</div><div class="metric-val">${d.google.ctr}%</div></div>
+        <div class="metric"><div class="metric-label">Avg. CPC</div><div class="metric-val">${fmtR(d.google.cpc,2)}</div></div>
+        <div class="metric"><div class="metric-label">Conversions</div><div class="metric-val">${rand(d.google.conv)}</div></div>
+        <div class="metric"><div class="metric-label">Conv. rate</div><div class="metric-val">${d.google.convRate}%</div></div>
+      </div>
+      <div class="card-foot">This total is the same GTM-tracked figure as "Leads generated" above — it includes traffic that arrived via social, not Google clicks alone.</div>
+    </div>
+    <div class="channel-card social">
+      <div class="channel-head">
+        <h3>Social Ads (Meta)</h3>
+        <div class="spend">${fmtR(d.social.spend)}</div>
+      </div>
+      <div class="metric-grid">
+        <div class="metric"><div class="metric-label">Impressions</div><div class="metric-val">${rand(d.social.impressions)}</div></div>
+        <div class="metric"><div class="metric-label">Reach</div><div class="metric-val">${rand(d.social.reach)}</div></div>
+        <div class="metric"><div class="metric-label">Clicks</div><div class="metric-val">${rand(d.social.clicks)} <span class="delta ${d.social.deltaClicks>=0?'up':'down'}">${d.social.deltaClicks>=0?'+':''}${d.social.deltaClicks}%</span></div></div>
+        <div class="metric"><div class="metric-label">CTR</div><div class="metric-val">${d.social.ctr}%</div></div>
+        <div class="metric"><div class="metric-label">Landing page views</div><div class="metric-val">${rand(d.social.lpv)}</div></div>
+        <div class="metric"><div class="metric-label">Cost per view</div><div class="metric-val">${fmtR(d.social.cpv,2)}</div></div>
+      </div>
+      <div class="card-foot">No separate conversion figure is reported at platform level — its contribution is folded into the combined GTM total.</div>
+    </div>
+  `;
+  document.getElementById('websiteStrip').innerHTML = `
+    <div class="wtitle">What landed on the website (Google Analytics)</div>
+    <div class="website-metrics">
+      <div><div class="metric-label">Total users</div><div class="metric-val">${rand(d.web.users)}</div></div>
+      <div><div class="metric-label">Views</div><div class="metric-val">${rand(d.web.views)}</div></div>
+      <div><div class="metric-label">Engagement rate</div><div class="metric-val">${d.web.engagement}%</div></div>
+    </div>
+  `;
+}
+
+function renderSales(m){
+  const d = data[m];
+  const s = d.leadSplit;
+  const preCount = d.leads * s.pre;
+  const newCount = d.leads * s.new;
+  const partsCount = d.leads * s.parts;
+  document.getElementById('salesGrid').innerHTML = `
+    <div class="sales-card pre">
+      <div class="pct">${(s.pre*100).toFixed(0)}%</div>
+      <div class="label">Pre-owned</div>
+      <div class="count">~${rand(preCount,0)} leads in ${d.label.split(' ')[0]}</div>
+    </div>
+    <div class="sales-card new">
+      <div class="pct">${(s.new*100).toFixed(0)}%</div>
+      <div class="label">New</div>
+      <div class="count">~${rand(newCount,0)} leads in ${d.label.split(' ')[0]}</div>
+    </div>
+    <div class="sales-card workshop">
+      <div class="pct">${(s.parts*100).toFixed(0)}%</div>
+      <div class="label">Parts</div>
+      <div class="count">~${rand(partsCount,0)} leads in ${d.label.split(' ')[0]}</div>
+    </div>
+  `;
+}
+
+function renderTrendIntro(){
+  const jun = costPerLead(data.jun), aug = costPerLead(data.aug);
+  document.getElementById('trendIntro').innerHTML = `Combined ad spend has stayed roughly flat, but leads have slipped each month, so the blended cost per lead has climbed from ${fmtR(jun,2)} in June to ${fmtR(aug,2)} in August.`;
+}
+
+function renderTrend(){
+  const months = ['jun','jul','aug'];
+  const vals = months.map(m => costPerLead(data[m]));
+  const max = Math.max(...vals) * 1.2;
+  const min = 0;
+  const w = 1000, h = 300, padL = 40, padR = 40, padT = 30, padB = 50;
+  const plotW = w - padL - padR, plotH = h - padT - padB;
+  const x = i => padL + (i / (months.length - 1)) * plotW;
+  const y = v => padT + plotH - ((v - min) / (max - min)) * plotH;
+
+  let path = '';
+  months.forEach((m,i) => {
+    const px = x(i), py = y(costPerLead(data[m]));
+    path += (i===0 ? `M${px},${py}` : ` L${px},${py}`);
+  });
+  let areaPath = path + ` L${x(months.length-1)},${padT+plotH} L${x(0)},${padT+plotH} Z`;
+
+  let points = '';
+  months.forEach((m,i) => {
+    const px = x(i), py = y(costPerLead(data[m]));
+    points += `
+      <circle cx="${px}" cy="${py}" r="5" fill="#D4A857" stroke="#0B0C10" stroke-width="2"/>
+      <text x="${px}" y="${py-16}" text-anchor="middle" class="cpl-num">${fmtR(costPerLead(data[m]),2)}</text>
+      <text x="${px}" y="${padT+plotH+30}" text-anchor="middle" class="month-label">${data[m].label.split(' ')[0]}</text>
+    `;
+  });
+
+  document.getElementById('trendSvg').innerHTML = `
+    <defs>
+      <linearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D4A857" stop-opacity="0.28"/>
+        <stop offset="100%" stop-color="#D4A857" stop-opacity="0"/>
+      </linearGradient>
+    </defs>
+    <line x1="${padL}" y1="${padT+plotH}" x2="${w-padR}" y2="${padT+plotH}" stroke="#26292F" stroke-width="1"/>
+    <path d="${areaPath}" fill="url(#grad)"/>
+    <path d="${path}" fill="none" stroke="#D4A857" stroke-width="2.5"/>
+    ${points}
+  `;
+}
+
+function setMonth(m){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.m === m));
+  renderHero(m);
+  renderCvrCompare(m);
+  renderChannels(m);
+  renderSales(m);
+  renderLeadTypeIntro(m);
+}
+
+document.getElementById('tabs').addEventListener('click', e => {
+  const btn = e.target.closest('.tab');
+  if(!btn) return;
+  setMonth(btn.dataset.m);
+});
+
+setMonth('aug');
+renderTrend();
+renderTrendIntro();
+</script>
+
+</body>
+</html>
